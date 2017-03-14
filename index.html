@@ -26,12 +26,14 @@ function doeDingen(){
         var targetLon = 3.681101;
         $( "#loc" ).text("Replaced!");
         $( "#loc" ).text("Replaced again!");
-        navigator.geolocation.getCurrentPosition(function(position){
+        navigator.geolocation.watchPosition(function(position){
                 console.log("Here!");
                 var dist = getDistanceFromLatLonInKm(targetLat, position.coords.latitude, targetLon, position.coords.longitude);
                 $( "#loc" ).text("Doel ligt ongeveer " + dist.toString() + "m hiervandaan.");
+                $( "#acc" ).text("Accuratesse  (m):" + position.accuracy);
+                $( "#upd" ).text("Laatste update:" + Math.round((new Date() - position.timestamp)/1000) + " seconden geleden.");
         }, function (){
-                $( "#loc" ).text("Oh-ow. Ik weet niet waar je bent :(");
+                $( "#loc" ).text("Oh-ow. Ik heb geen toegang tot je GPS :(");
         });
 }
 </script>
@@ -40,7 +42,10 @@ function doeDingen(){
 <h1>You are here:</h1>
 <div id="loc">
 Woops
-</p>
+</div>
+<br/>
+<div id="acc"></div><br/>
+<div id="upd"></div>
 </body>
 </html>
 
