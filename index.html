@@ -27,7 +27,7 @@ function doeDingen(){
         $( "#loc" ).text("Wachten op GPS...");
         var lastUpd = 0;
         setInterval(function(){
-            $( "#upd" ).text("Laatste update: " + Math.round((new Date() - lastUpd)/1000) + " seconden geleden.");
+            $( "#upd" ).text("Laatste update: " + Math.round((new Date() - lastUpd)/1000) + " seconde(n) geleden.");
         }, 1000);
         navigator.geolocation.watchPosition(function(position){
                 console.log("Here!");
