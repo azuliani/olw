@@ -5,7 +5,8 @@
 function doeDingen(){
         $( "#loc" ).text("Replaced!");
         $( "#loc" ).text("Replaced again!");
-        navigator.geolocation.getCurrentPosition(function(pos){
+        navigator.geolocation.getCurrentPosition(function(position){
+                console.log("Here!");
                 $( "#loc" ).text("Latitude: " + position.coords.latitude + 
                     "<br>Longitude: " + position.coords.longitude);
         }, function (){
