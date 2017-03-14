@@ -24,17 +24,19 @@ function deg2rad(deg) {
 function doeDingen(){
         var targetLat = 51.049151;
         var targetLon = 3.681101;
-        $( "#loc" ).text("Replaced!");
-        $( "#loc" ).text("Replaced again!");
+        $( "#loc" ).text("Locatie aan het bepalen...");
+        var lastUpd = new Date();
+        setInterval(function(){
+            $( "#upd" ).text("Laatste update: " + Math.round((new Date() - lastUpd)/1000) + " seconden geleden.");
+        });
         navigator.geolocation.watchPosition(function(position){
                 console.log("Here!");
                 var dist = getDistanceFromLatLonInKm(targetLat, position.coords.latitude, targetLon, position.coords.longitude);
                 $( "#loc" ).text("Doel ligt ongeveer " + dist.toString() + "m hiervandaan.");
-                $( "#acc" ).text("Accuratesse  (m):" + position.accuracy);
-                $( "#upd" ).text("Laatste update:" + Math.round((new Date() - position.timestamp)/1000) + " seconden geleden.");
+                $( "#acc" ).text("Accuratesse  (m): " + position.coords.accuracy);
         }, function (){
                 $( "#loc" ).text("Oh-ow. Ik heb geen toegang tot je GPS :(");
-        });
+        },{enableHighAccuracy: true});
 }
 </script>
 </head>
